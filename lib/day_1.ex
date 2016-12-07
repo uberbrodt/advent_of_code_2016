@@ -1,17 +1,19 @@
 defmodule Day1 do
 
-  @directions  ["R2", "L3", "R2", "R4", "L2", "L1", "R2", "R4", "R1", "L4", "L5", "R5",
- 		"R5", "R2", "R2", "R1", "L2", "L3", "L2", "L1", "R3", "L5", "R187", "R1",
-		"R4", "L1", "R5", "L3", "L4", "R50", "L4", "R2", "R70", "L3", "L2", "R4",
-		 "R3", "R194", "L3", "L4", "L4", "L3", "L4", "R4", "R5", "L1", "L5", "L4",
-		 "R1", "L2", "R4", "L5", "L3", "R4", "L5", "L5", "R5", "R3", "R5", "L2",
-		"L4", "R4", "L1", "R3", "R1", "L1", "L2", "R2", "R2", "L3", "R3", "R2",
-		 "R5", "R2", "R5", "L3", "R2", "L5", "R1", "R2", "R2", "L4", "L5", "L1",
-	       	"L4", "R4", "R3", "R1", "R2", "L1", "L2", "R4", "R5", "L2", "R3", "L4",
-	       	"L5", "L5", "L4", "R4", "L2", "R1", "R1", "L2", "L3", "L2", "R2", "L4",
- 		"R3", "R2", "L1", "L3", "L2", "L4", "L4", "R2", "L3", "L3", "R2", "L4",
-		 "L3", "R4", "R3", "L2", "L1", "L4", "R4", "R2", "L4", "L4", "L5", "L1",
- 		"R2", "L5", "L2", "L3", "R2", "L2"]
+  @directions  ["R2", "L3", "R2", "R4", "L2", "L1", "R2", "R4", "R1", "L4",
+                "L5", "R5","R5", "R2", "R2", "R1", "L2", "L3", "L2", "L1",
+                "R3", "L5", "R187", "R1", "R4", "L1", "R5", "L3", "L4", "R50",
+                "L4","R2","R70", "L3", "L2", "R4","R3", "R194", "L3", "L4",
+                "L4", "L3", "L4", "R4", "R5", "L1", "L5", "L4", "R1", "L2",
+                "R4","L5", "L3", "R4", "L5", "L5", "R5", "R3", "R5", "L2","L4",
+                "R4", "L1", "R3", "R1", "L1", "L2", "R2", "R2", "L3", "R3",
+                "R2", "R5", "R2", "R5", "L3", "R2", "L5", "R1", "R2", "R2",
+                "L4", "L5", "L1", "L4", "R4", "R3", "R1", "R2", "L1", "L2",
+                "R4", "R5", "L2", "R3", "L4", "L5", "L5", "L4", "R4", "L2",
+                "R1", "R1", "L2", "L3", "L2", "R2", "L4", "R3", "R2", "L1",
+                "L3", "L2", "L4", "L4", "R2", "L3", "L3", "R2", "L4", "L3",
+                "R4", "R3", "L2", "L1", "L4", "R4", "R2", "L4", "L4", "L5",
+                "L1", "R2", "L5", "L2", "L3", "R2", "L2"]
 
   @north  0
   @east  1
@@ -51,7 +53,6 @@ defmodule Day1 do
 
   def find_first_repeating(dirs, prev_locations \\ [], current_location \\ {0,0},
         facing \\ @north) do
-    IO.inspect prev_locations
 
     if length(dirs) == 0 do 
       raise "no repeats found"
@@ -84,8 +85,8 @@ defmodule Day1 do
       if new_coordinate in prev_locations do 
         {:ok, new_coordinate}
       else 
-        get_coordinates_on_path(cnt - 1, walking_direction,
-                                (prev_locations ++ [new_coordinate]), new_coordinate, facing)
+        get_coordinates_on_path(cnt - 1, walking_direction, (prev_locations ++
+                                [new_coordinate]), new_coordinate, facing)
       end
     end
   end
@@ -113,7 +114,8 @@ defmodule Day1 do
 
   def distance(directions, origin \\ {0,0}, starting_dir \\ @north) do
     coordinates = final_location(directions, origin, starting_dir)
-    abs(elem(origin, 0) - elem(coordinates,0)) + abs(elem(origin, 1) - elem(coordinates, 1))
+    abs(elem(origin, 0) - elem(coordinates,0)) + abs(elem(origin, 1) -
+        elem(coordinates, 1))
   end
 
   def north, do: @north
